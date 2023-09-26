@@ -1,22 +1,22 @@
-# Impact_notes
+# Summary
 
-# Spark customer data repo
+## 1. customer data repo using apache Spark 
 	Historical - 70 million processed in 30 mins
 	Incremental - 1 million per month in 5-10 mins
 
-# Company wide ELK platform setup for log management
+## 2. Company wide ELK platform setup for log management
 
-# 20% CPU load reduction -  Tabular business data module 
+## 3. 20% CPU load reduction -  Tabular business data module 
 	a) query tuning using pt-query-digest tool report
 	b) scheduled job to flag any out of sync/missing index across multiple running multitenant deployments
 
-# JVM Heap tuning
+## 4. JVM Heap tuning
 300 MB RAM savings out of 4GB heap JVM in production using String Deduplication in G1 feature with acceptable overhead of 4 min total pause time in 13 days of uptime.
 
-# Bias for action driven increase sales of B2C MVP Use case 
+## 5. Bias for action driven increase sales of B2C MVP Use case 
 Fasten sales conversion cycle for AutoFill address integration with shopify merchants using plug n play shopify in house custom app.
 
-# IMPACT-Details
+# Deep dive
 SQL queries tuning
 	How to tune
 	1) STRAIGHT_JOIN based control of exec. plan
