@@ -1,5 +1,3 @@
-# Summary
-
 ## 1. customer data repo using apache Spark 
 Historical - 70 million (55 million unique users) processed in 30 mins
 Incremental - 1.5 million records(1 million new users) per month in 5-10 mins
@@ -28,7 +26,7 @@ https://use-the-index-luke.com/sql/sorting-grouping
 ##### How to monitor gain
 1) monitor http response time percentiles over a 2 week period before/afte
 
-# 3.2 Scheduled job to regularly look for tables that need their index statistics updated.
+#### 3.2 Scheduled job to regularly look for tables that need their index statistics updated.
 	1) query basis last_update threshold
 	SELECT database_name, table_name, n_rows, last_update
 	          FROM mysql.innodb_table_stats
