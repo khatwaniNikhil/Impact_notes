@@ -18,16 +18,25 @@ Fasten sales conversion cycle for AutoFill address integration with shopify merc
 
 # Deep dive
 SQL queries tuning
-	How to tune
-	1) STRAIGHT_JOIN based control of exec. plan
-	2) while using group by over one column, prefer order by over same column
-	3) on querying facility specific data, apply facility specific filter condition
-	4) change column order in index to improve index leaf node scan performance 
-	5) all  "columns" fetched in query returned from index instead of table lookup.
-	6) removing some unnecessary joins corrected the queryplan to join tables in performant order
-	How to monitor gain
-	1) flow level http response time percentiles over a 2 week period before/after
-	2)
+1. Corner cases where mysql query plan optimiser choice of join order is not performant - STRAIGHT_JOIN based control of exec. plan
+2. order by
+https://use-the-index-luke.com/sql/sorting-grouping
+   #### challenges
+   1. sorting is cpu intensive
+   2. need to read complete input before producing first output. Problem for large data sets.
+   3. index range scans can complicate things further.  A FULL TABLE SCAN with an explicit sort operation might be even faster in this case
+   4. where clause affects also needs to be throughly investigated.
+   #### Solution
+    1. Prefer using indexed column for order by will avoid sorting expensive operation as sql index is an ordered data structure. Also it is a pipeline operation and suits paginated query results.
+       
+4. while using group by over one column, prefer order by over same column
+5.  on querying facility specific data, apply facility specific filter condition
+6. change column order in index to improve index leaf node scan performance
+7. all  "columns" fetched in query returned from index instead of table lookup.
+8.  removing some unnecessary joins corrected the queryplan to join tables in performant order
+	
+How to monitor gain
+1) flow level http response time percentiles over a 2 week period before/afte
 
 Scheduled job to regularly look for tables that need their index statistics updated.
 	1) query basis last_update threshold
