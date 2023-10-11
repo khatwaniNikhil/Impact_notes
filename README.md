@@ -36,11 +36,13 @@ https://use-the-index-luke.com/sql/sorting-grouping
 	b) scheduled job to flag any out of sync/missing index across multiple running multitenant deployments
 
 ## 4. JVM Heap tuning
-300 MB RAM savings out of 4GB heap JVM in production using String Deduplication in G1 feature with acceptable overhead of 4 min total pause time in 13 days of uptime.
-1. focussed on de duplicating long-lived strings @ JVM startup (within JVM cache/configuration layer)
-2. deduplicate candidate threshold was set to 15 instead of default 3 to delay de duplication as far as possible just to further delay pause time.
-3. Workflow to test the savings
-   1. for both with and without "dedup string " jvm flag: capture all objects heap histo and live objects heap histo
+https://openjdk.org/jeps/192
+1. G1GC specific JVM flag which will async - check any duplicate char[] within string objects and will perform deduplication
+2. 300 MB RAM savings out of 4GB heap JVM in production using String Deduplication in G1 feature. 
+3. with acceptable overhead of 4 min total pause time in 13 days of uptime.
+4. Applicable where existing codebase with lot of third party libraries and putting String.intern not practised in the business logic layer.
+5. Our application has long-lived duplicated strings - JVM heap based application cache/configuration layer.
+6. Test workflow: for both with and without "dedup string " jvm flag: capture all objects heap histo and live objects heap histo
 
 ## 5. Bias for action driven increase sales of B2C MVP Use case 
 Fasten sales conversion cycle for AutoFill address integration with shopify merchants using plug n play shopify in house custom app.
