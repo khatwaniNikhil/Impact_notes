@@ -1,6 +1,6 @@
 ## 1. customer data repo using apache Spark 
-Historical - 70 million (55 million unique users) processed in 30 mins
-Incremental - 1.5 million records(1 million new users) per month in 5-10 mins
+1. Historical - 70 million (55 million unique users) processed in 30 mins
+2. Incremental - 1.5 million records(1 million new users) per month in 5-10 mins
 
 ## 2. Company wide ELK platform for different log sources: (tomcat access logs, egress api hits logs, tenant triggered exports logs)
 
